@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BenjRog's Personal Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://your-image-url/sunset.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #1E90FF;
+        }
+        .header p {
+            color: #FFA500;
+        }
+        .admin-panel, .message-board {
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .note {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BenjRog's Personal Page</h1>
+            <p>Contact: 1224239119@qq.com</p>
+        </div>
+        <div id="login-section" class="login-section">
+            <input type="email" id="email-input" placeholder="Enter your email">
+            <button onclick="login()">Login</button>
+        </div>
+        <div id="admin-panel" class="admin-panel hidden">
+            <h2>Admin Panel</h2>
+            <textarea id="main-board" cols="30" rows="10">Editable main board text.</textarea>
+            <button onclick="saveMainBoard()">Save</button>
+        </div>
+        <div id="message-board" class="message-board hidden">
+            <h2>Message Board</h2>
+            <textarea id="message-input" cols="30" rows="3" placeholder="Write a message"></textarea>
+            <select id="color-picker">
+                <option value="red" style="background-color:red;">Red</option>
+                <option value="orange" style="background-color:orange;">Orange</option>
+                <option value="yellow" style="background-color:yellow;">Yellow</option>
+                <option value="green" style="background-color:green;">Green</option>
+                <option value="blue" style="background-color:blue;">Blue</option>
+                <option value="purple" style="background-color:purple;">Purple</option>
+            </select>
+            <button onclick="postMessage()">Post Message</button>
+            <div id="messages"></div>
+        </div>
+    </div>
+
+    <script>
+        const adminEmail = "1224239119@qq.com";
+
+        function login() {
+            const email = document.getElementById('email-input').value;
+            if (email === adminEmail) {
+                document.getElementById('admin-panel').classList.remove('hidden');
+            }
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('message-board').classList.remove('hidden');
+        }
+
+        function saveMainBoard() {
+            const mainBoardContent = document.getElementById('main-board').value;
+            alert('Main board saved: ' + mainBoardContent);
+        }
+
+        function postMessage() {
+            const message = document.getElementById('message-input').value;
+            const color = document.getElementById('color-picker').value;
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'note';
+            messageDiv.style.backgroundColor = color;
+            messageDiv.textContent = message;
+            document.getElementById('messages').appendChild(messageDiv);
+            document.getElementById('message-input').value = '';
+        }
+    </script>
+</body>
+</html>
